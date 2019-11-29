@@ -5,6 +5,11 @@ COMPATIBLE_MACHINE = "(rk3399)"
 
 require recipes-bsp/u-boot/u-boot.inc
 
+DEPENDS += "rk-binary-native"
+
+UBOOT_BINARY = "uboot.img"
+UBOOT_TEXT_BASE = "0x200000"
+
 SRCREV = "${AUTOREV}"
 SRC_URI = " \
 	git://github.com/radxa/u-boot.git;branch=stable-4.4-rockpi4 \
@@ -14,4 +19,8 @@ S = "${WORKDIR}/git"
 do_configure () {
  	echo ${PWD}   
     oe_runmake -C ${S} O=${B} ${UBOOT_MACHINE}
+}
+
+do_compile_append () {
+	loaderimage --pack --uboot ${B}/u-boot.bin ${B}/${UBOOT_BINARY} ${UBOOT_TEXT_BASE#*=} --size "${RK_LOADER_SIZE}" "${RK_LOADER_BACKUP_NUM}"
 }
