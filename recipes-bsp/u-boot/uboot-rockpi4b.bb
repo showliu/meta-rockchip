@@ -24,3 +24,9 @@ do_configure () {
 do_compile_append () {
 	loaderimage --pack --uboot ${B}/u-boot-dtb.bin ${B}/${UBOOT_BINARY} ${UBOOT_TEXT_BASE#*=} --size "${RK_LOADER_SIZE}" "${RK_LOADER_BACKUP_NUM}"
 }
+
+do_deploy () {
+	bbnote "${PN}: Deploy ${UBOOT_BINARY} ...."
+	install "${UBOOT_BINARY}" "${DEPLOYDIR}/${UBOOT_BINARY}-${SRCREV}"
+	ln -sf "${UBOOT_BINARY}-${SRCREV}" "${DEPLOYDIR}/${UBOOT_BINARY}"
+}
