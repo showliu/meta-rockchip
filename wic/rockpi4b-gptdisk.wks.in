@@ -5,8 +5,8 @@
 
 # 0~32K: gpt
 bootloader --ptable gpt
-part --source rawcopy --sourceparams="file=idblock.img" --align 1 --no-table
-part --source rawcopy --sourceparams="file=uboot.img" --part-name uboot --align 4096
+part --source rawcopy --sourceparams="file=idblock.img" 
+part --source rawcopy --sourceparams="file=uboot.img" --part-name uboot 
 part --source rawcopy --sourceparams="file=trust.img" --part-name trust
-part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --size 112M
-part / --source rootfs --fstype ${RK_ROOTFS_TYPE} --part-name rootfs --uuid ${RK_ROOTDEV_UUID} --align 8192
+part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --size 112M
+part / --source rootfs --fstype ${RK_ROOTFS_TYPE} --part-name rootfs --uuid ${RK_ROOTDEV_UUID}
