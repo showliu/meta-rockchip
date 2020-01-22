@@ -25,7 +25,8 @@ do_compile_append() {
 }
 
 do_deploy_append() {
-	echo " Do something here !!!"
+	bbnote "${PN}: Deploy Kernel ${KERNEL_IMAGETYPE} ..."
+#	install "${KERNEL_IMAGETYPE}" "${DEPLOYDIR}/${KERNEL_IMAGETYPE}-${SRCREV}"
+#	ln -sf "${KERNEL_IMAGETYPE}-${SRCREV}" "${DEPLOYDIR}/${KERNEL_IMAGETYPE}"
 }
-
 deltask kernel_configme
